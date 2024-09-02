@@ -1,0 +1,67 @@
+<html>
+<head>
+   <title>Task3- Portfolio</title>
+   <style>
+      #a {
+         height: 100%;
+         width: 100%;
+         display: block;
+         margin-left: auto;
+         margin-right: auto;
+         margin-top: 0px;
+         margin-bottom: 0px;
+         
+        opacity: 0.3;
+
+      } 
+      *{
+        font-size: xx-large;
+      }  
+.container {
+  position: relative;
+  text-align:left;
+  font-size: xx-large;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  right: 40%;
+  transform: translate(-50%, -50%);
+}
+
+.pics{
+  width: 100px;
+}
+</style>
+   
+</head>
+<body>
+    <div class="container"><img id="a" src="https://img.freepik.com/premium-photo/serene-lofiinspired-anime-character-studies-desk-rainy-day_918839-25924.jpg" alt="Beach image">
+      <div class="centered">
+        <p></p><b>Riduvarshini R S</b>
+      <p>
+        I'm a BTech Computer Science Student
+      </p>
+      <a href="https://www.linkedin.com/in/riduvarshini-r-s-941629289/"><img class="pics" src="data:image/png;base64,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" alt="LinkedIn"></a>
+      <br><br>
+
+      <a href="https://github.com/Riduvarshinirs?tab=repositories"><img class="pics" src="data:image/png;base64,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" alt="GitHub"></a>
+
+    </div>  
+      <p></p>
+
+    </div>
+  
+    <p><b>Skills:</b></p>
+    <ol> 
+        <li>python</li>
+        <li> c</li> 
+        <li>cpp</li> 
+        <li>html</li> 
+        <li>css</li>
+        <li>Javascript</li>
+    </ol>
+   
+</body>
+</html>
