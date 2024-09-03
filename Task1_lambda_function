@@ -1,0 +1,70 @@
+import json
+import os
+import boto3
+
+def lambda_handler(event, context):
+    try:
+        mypage = page_router(event['httpMethod'], event['queryStringParameters'], event['body'])
+        return mypage
+    except Exception as e:
+        return {
+            'statusCode': 500,
+            'body': json.dumps({'error': str(e)})
+        }
+
+def page_router(httpmethod, querystring, formbody):
+    if httpmethod == 'GET':
+        try:
+            with open('task1.html', 'r') as htmlFile:
+                htmlContent = htmlFile.read()
+            return {
+                'statusCode': 200,
+                'headers': {"Content-Type": "text/html"},
+                'body': htmlContent
+            }
+        except Exception as e:
+            return {
+                'statusCode': 500,
+                'body': json.dumps({'error': str(e)})
+            }
+
+    elif httpmethod == 'POST':
+        try:
+            insert_record(formbody)
+            with open('task1_1.html', 'r') as htmlFile:
+                htmlContent = htmlFile.read()
+            return {
+                'statusCode': 200,
+                'headers': {"Content-Type": "text/html"},
+                'body': htmlContent
+            }
+        except Exception as e:
+            return {
+                'statusCode': 500,
+                'body': json.dumps({'error': str(e)})
+            }
+
+def insert_record(formbody):
+    # Parse the form body to extract 'username' and 'password'
+    form_data = dict(item.split("=") for item in formbody.split("&"))
+    
+    username = form_data.get('username', '')
+    password = form_data.get('password', '')
+    
+    if not username or not password:
+        raise ValueError("Username and password are required fields.")
+    
+    # Construct the DynamoDB insert statement
+    dynamo_statement = f"""
+    INSERT INTO table 
+    value {{
+        'username' : '{username}',
+        'password' : '{password}'
+    }}
+    """
+    
+    client = boto3.client('dynamodb')
+    response = client.execute_statement(Statement=dynamo_statement)
+    
+    return response
+
